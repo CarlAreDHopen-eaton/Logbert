@@ -136,6 +136,9 @@
   <data name="FrmFilterTbEdit_Dark" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\FrmFilterTbEdit_Dark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="FrmLogFilterIgnorehCase_Dark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\FrmLogFilterIgnorehCase_dark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="FrmFilterTbRemove_Dark" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\FrmFilterTbRemove_Dark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

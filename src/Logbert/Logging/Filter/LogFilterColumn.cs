@@ -142,12 +142,14 @@ namespace Couchcoding.Logbert.Logging.Filter
     /// <param name="columnIndex">The new column index of the <see cref=LogFilterColumn"/>.</param>
     /// <param name="operatorIndex">The new operator index of thr <see cref="LogFilterColumn"/>.</param>
     /// <param name="expression">The new regular expression of the <see cref=LogFilterColumn"/>.</param>
-    public void Update(bool isActive, int columnIndex, int operatorIndex, string expression)
+    /// <param name="ignoreCase">The param to ignore case when runing the reglar expression</param>
+    public void Update(bool isActive, int columnIndex, int operatorIndex, string expression, bool ignoreCase)
     {
       mIsActive              = isActive;
       mColumnIndex           = columnIndex;
       mOperatorIndex         = operatorIndex;
-      mColumnMatchValueRegEx = new Regex(expression);
+      RegexOptions options = ignoreCase ? RegexOptions.IgnoreCase : RegexOptions.None;
+      mColumnMatchValueRegEx = new Regex(expression, options);
     }
 
     #endregion
@@ -161,12 +163,14 @@ namespace Couchcoding.Logbert.Logging.Filter
     /// <param name="columnIndex">The index of the column to match.</param>
     /// <param name="operatorIndex">The operator index of thr <see cref="LogFilterColumn"/>.</param>
     /// <param name="matchRegex">The string for the column match <see cref="Regex"/>.</param>
-    public LogFilterColumn(bool isActive, int columnIndex, int operatorIndex, string matchRegex)
+    /// <param name="ignoreCase">The param to ignore case when runing the reglar expression</param>
+    public LogFilterColumn(bool isActive, int columnIndex, int operatorIndex, string matchRegex, bool ignoreCase)
     {
       mIsActive              = isActive;
       mColumnIndex           = columnIndex;
       mOperatorIndex         = operatorIndex;
-      mColumnMatchValueRegEx = new Regex(matchRegex ?? ".*");
+      RegexOptions options   = ignoreCase ? RegexOptions.IgnoreCase : RegexOptions.None;
+      mColumnMatchValueRegEx = new Regex(matchRegex ?? ".*", options);
     }
 
     #endregion

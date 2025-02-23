@@ -43,6 +43,7 @@ namespace Couchcoding.Logbert.Theme.Resources
       { "FrmFilterTbAdd",          Properties.VisualStudioDarkResource.FrmFilterTbAdd_Dark          },
       { "FrmFilterTbEdit",         Properties.VisualStudioDarkResource.FrmFilterTbEdit_Dark         },
       { "FrmFilterTbRemove",       Properties.VisualStudioDarkResource.FrmFilterTbRemove_Dark       },
+      { "FrmLogFilterIgnorehCase", Properties.VisualStudioDarkResource.FrmLogFilterIgnorehCase_Dark },
       { "FrmScriptTbCopy",         Properties.VisualStudioDarkResource.FrmScriptTbCopy_Dark         },
       { "FrmScriptTbCut",          Properties.VisualStudioDarkResource.FrmScriptTbCut_Dark          },
       { "FrmScriptTbPaste",        Properties.VisualStudioDarkResource.FrmScriptTbPaste_Dark        },

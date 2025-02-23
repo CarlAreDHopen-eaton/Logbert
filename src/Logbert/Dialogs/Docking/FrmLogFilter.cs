@@ -237,7 +237,8 @@ namespace Couchcoding.Logbert.Dialogs.Docking
               addEditFilterDlg.IsFilterActive
             , addEditFilterDlg.ColumnIndex
             , addEditFilterDlg.OperatorIndex
-            , addEditFilterDlg.ExpressionRegex);
+            , addEditFilterDlg.ExpressionRegex
+            , Settings.Default.FrmLogFilterIgnorehCase);
 
           mLogFilter.Add(newLogFilter);
 
@@ -248,6 +249,31 @@ namespace Couchcoding.Logbert.Dialogs.Docking
           mLogFilterHandler.FilterChanged();
         }
       }
+    }
+
+    /// <summary>
+    /// Handles the ignore case click event.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void TsbIgnoreCaseClicked(object sender, EventArgs e)
+    {
+      tsbIgnoreCase.Checked = !tsbIgnoreCase.Checked;
+
+      Settings.Default.FrmLogFilterIgnorehCase = tsbIgnoreCase.Checked;
+      Settings.Default.Save();
+
+      foreach (LogFilterColumn filter in mLogFilter)
+      {
+        filter.Update(filter.IsActive, filter.ColumnIndex, filter.OperatorIndex, filter.ColumnMatchValueRegEx, Settings.Default.FrmLogFilterIgnorehCase);
+      }
+
+      // Update the data grid.
+      UpdateLogFilters();
+
+      // Inform the filter handler about the changed filters.
+      mLogFilterHandler.FilterChanged();
+
     }
 
     /// <summary>
@@ -271,7 +297,8 @@ namespace Couchcoding.Logbert.Dialogs.Docking
                   addEditFilterDlg.IsFilterActive
                 , addEditFilterDlg.ColumnIndex
                 , addEditFilterDlg.OperatorIndex
-                , addEditFilterDlg.ExpressionRegex);
+                , addEditFilterDlg.ExpressionRegex
+                , Settings.Default.FrmLogFilterIgnorehCase);
 
               // Update the data grid.
               UpdateLogFilters();
@@ -342,7 +369,8 @@ namespace Couchcoding.Logbert.Dialogs.Docking
               (bool)dgvFilter.Rows[e.RowIndex].Cells[e.ColumnIndex].Value
             , filterToEdit.ColumnIndex
             , filterToEdit.OperatorIndex
-            , filterToEdit.ColumnMatchValueRegEx);
+            , filterToEdit.ColumnMatchValueRegEx
+            , Settings.Default.FrmLogFilterIgnorehCase);
 
           // Update the data grid.
           UpdateLogFilters();
@@ -473,6 +501,7 @@ namespace Couchcoding.Logbert.Dialogs.Docking
       tsbAddFilter.Image    = theme.Resources.Images["FrmFilterTbAdd"];
       tsbEditFilter.Image   = theme.Resources.Images["FrmFilterTbEdit"];
       tsbRemoveFilter.Image = theme.Resources.Images["FrmFilterTbRemove"];
+      tsbIgnoreCase.Image   = theme.Resources.Images["FrmLogFilterIgnorehCase"];
       tsbZoomIn.Image       = theme.Resources.Images["FrmMainTbZoomIn"];
       tsbZoomOut.Image      = theme.Resources.Images["FrmMainTbZoomOut"];
 
@@ -520,6 +549,8 @@ namespace Couchcoding.Logbert.Dialogs.Docking
       mLogProvider      = logProvider;
       mLogFilterHandler = filterHandler;
       Font              = SystemFonts.MessageBoxFont;
+
+      tsbIgnoreCase.Checked = Settings.Default.FrmLogFilterIgnorehCase;
 
       if (mLogFilterHandler != null)
       {

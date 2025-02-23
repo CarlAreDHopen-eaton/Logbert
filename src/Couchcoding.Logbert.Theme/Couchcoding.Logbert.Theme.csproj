@@ -598,5 +598,14 @@
   <ItemGroup>
     <None Include="Resources\FrmBookmarks_Light.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FrmLogFilterIgnorehCase_Blue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FrmLogFilterIgnorehCase_Dark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FrmLogFilterIgnorehCase_Light.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
