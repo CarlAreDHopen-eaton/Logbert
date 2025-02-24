@@ -153,6 +153,16 @@ namespace Couchcoding.Logbert.Theme.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap FrmLogFilterRecallFilter_Light {
+            get {
+                object obj = ResourceManager.GetObject("FrmLogFilterRecallFilter_Light", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap FrmLogTreeNodeCollapsed_Light {
             get {
                 object obj = ResourceManager.GetObject("FrmLogTreeNodeCollapsed_Light", resourceCulture);

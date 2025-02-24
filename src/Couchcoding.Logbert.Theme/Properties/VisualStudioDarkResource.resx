@@ -271,4 +271,7 @@
   <data name="FrmStatisticTbLegend_Dark" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\FrmStatisticTbLegend_Dark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="FrmLogFilterRecallFilter_Dark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FrmLogFilterRecallFilter_Dark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

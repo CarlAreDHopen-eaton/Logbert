@@ -43,6 +43,7 @@ using Couchcoding.Logbert.Properties;
 using Couchcoding.Logbert.Theme.Interfaces;
 using Couchcoding.Logbert.Theme;
 using Couchcoding.Logbert.Theme.Themes;
+using Couchcoding.Logbert.Gui.Helper;
 
 namespace Couchcoding.Logbert.Dialogs.Docking
 {
@@ -242,11 +243,13 @@ namespace Couchcoding.Logbert.Dialogs.Docking
 
           mLogFilter.Add(newLogFilter);
 
+          SaveCurrentFilter();
+
           // Update the data grid.
           UpdateLogFilters();
 
           // Inform the filter handler about the changed filters.
-          mLogFilterHandler.FilterChanged();
+          mLogFilterHandler.FilterChanged();          
         }
       }
     }
@@ -273,7 +276,30 @@ namespace Couchcoding.Logbert.Dialogs.Docking
 
       // Inform the filter handler about the changed filters.
       mLogFilterHandler.FilterChanged();
+    }
 
+    /// <summary>
+    /// Handles the recall filter button click event.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void tsbRecallFilter_Click(object sender, EventArgs e)
+    {
+      tsbRecallFilter.Checked = !tsbRecallFilter.Checked;
+      Settings.Default.FrmLogFilterRecallFilter = tsbRecallFilter.Checked;
+      Settings.Default.Save();
+
+      if (tsbRecallFilter.Checked)
+      {
+        // Save the current log filter.
+        SaveCurrentFilter();
+      }
+      else
+      {
+        // Just save empty log filter.
+        Settings.Default.FrmLogFilterExpressions = new FilterSettings();
+        Settings.Default.Save();
+      }
     }
 
     /// <summary>
@@ -300,6 +326,8 @@ namespace Couchcoding.Logbert.Dialogs.Docking
                 , addEditFilterDlg.ExpressionRegex
                 , Settings.Default.FrmLogFilterIgnorehCase);
 
+              SaveCurrentFilter();
+
               // Update the data grid.
               UpdateLogFilters();
 
@@ -320,6 +348,8 @@ namespace Couchcoding.Logbert.Dialogs.Docking
       {
         // Remove the filter from the collction.
         mLogFilter.Remove(dgvFilter.SelectedRows[0].Tag as LogFilter);
+
+        SaveCurrentFilter();
 
         // Update the data grid.
         UpdateLogFilters();
@@ -389,6 +419,62 @@ namespace Couchcoding.Logbert.Dialogs.Docking
       if (dgvFilter.IsCurrentCellDirty)
       {
         dgvFilter.CommitEdit(DataGridViewDataErrorContexts.Commit);
+      }
+    }
+
+    /// <summary>
+    /// Loads the filter from settings.
+    /// </summary>
+    private void LoadFilterFromSettings()
+    {
+      FilterSettings filterSettings = Settings.Default.FrmLogFilterExpressions;
+      if (filterSettings != null && filterSettings.Count > 0)
+      {
+        mLogFilter.Clear();
+
+        foreach (FilterSetting filter in filterSettings)
+        {
+          LogFilterColumn newLogFilter = new LogFilterColumn(
+            filter.IsFilterActive
+          , filter.ColumnIndex
+          , filter.OperatorIndex
+          , filter.ExpressionRegex
+          , Settings.Default.FrmLogFilterIgnorehCase);
+
+          mLogFilter.Add(newLogFilter);
+
+          // Update the data grid.
+          UpdateLogFilters();
+
+          // Inform the filter handler about the changed filters.
+          mLogFilterHandler.FilterChanged();
+        }
+      }
+    }
+
+    /// <summary>
+    /// Saves the current filter to the settings.
+    /// </summary>
+    private void SaveCurrentFilter()
+    {
+      if (Settings.Default.FrmLogFilterRecallFilter)
+      {
+        if (mLogFilter != null)
+        {
+          FilterSettings filterSettings = new FilterSettings();
+          foreach (LogFilterColumn filter in mLogFilter)
+          {
+            filterSettings.Add(new FilterSetting
+            {
+              ColumnIndex = filter.ColumnIndex,
+              ExpressionRegex = filter.ColumnMatchValueRegEx,
+              OperatorIndex = filter.OperatorIndex,
+              IsFilterActive = filter.IsActive
+            });
+          }
+          Settings.Default.FrmLogFilterExpressions = filterSettings;
+          Settings.Default.Save();
+        }
       }
     }
 
@@ -502,6 +588,7 @@ namespace Couchcoding.Logbert.Dialogs.Docking
       tsbEditFilter.Image   = theme.Resources.Images["FrmFilterTbEdit"];
       tsbRemoveFilter.Image = theme.Resources.Images["FrmFilterTbRemove"];
       tsbIgnoreCase.Image   = theme.Resources.Images["FrmLogFilterIgnorehCase"];
+      tsbRecallFilter.Image = theme.Resources.Images["FrmLogFilterRecallFilter"];
       tsbZoomIn.Image       = theme.Resources.Images["FrmMainTbZoomIn"];
       tsbZoomOut.Image      = theme.Resources.Images["FrmMainTbZoomOut"];
 
@@ -551,10 +638,16 @@ namespace Couchcoding.Logbert.Dialogs.Docking
       Font              = SystemFonts.MessageBoxFont;
 
       tsbIgnoreCase.Checked = Settings.Default.FrmLogFilterIgnorehCase;
+      tsbRecallFilter.Checked = Settings.Default.FrmLogFilterRecallFilter;
 
       if (mLogFilterHandler != null)
       {
         mLogFilterHandler.RegisterFilterProvider(this);
+      }
+
+      if (Settings.Default.FrmLogFilterRecallFilter)
+      {
+        LoadFilterFromSettings();
       }
     }
 

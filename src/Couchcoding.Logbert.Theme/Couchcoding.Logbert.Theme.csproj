@@ -114,9 +114,9 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Properties\VisualStudioLightResource.Designer.cs">
-      <DependentUpon>VisualStudioLightResource.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>VisualStudioLightResource.resx</DependentUpon>
     </Compile>
     <Compile Include="Resources\ThemeResources.cs" />
     <Compile Include="Resources\VisualStudioBlueResources.cs" />
@@ -144,8 +144,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\VisualStudioLightResource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>VisualStudioLightResource.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>VisualStudioLightResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -606,6 +606,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\FrmLogFilterIgnorehCase_Light.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FrmLogFilterRecallFilter_Blue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FrmLogFilterRecallFilter_Dark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FrmLogFilterRecallFilter_Light.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -2363,5 +2363,28 @@ namespace Couchcoding.Logbert.Properties {
                 this["FrmLogFilterIgnorehCase"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::Couchcoding.Logbert.Gui.Helper.FilterSettings FrmLogFilterExpressions {
+            get {
+                return ((global::Couchcoding.Logbert.Gui.Helper.FilterSettings)(this["FrmLogFilterExpressions"]));
+            }
+            set {
+                this["FrmLogFilterExpressions"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool FrmLogFilterRecallFilter {
+            get {
+                return ((bool)(this["FrmLogFilterRecallFilter"]));
+            }
+            set {
+                this["FrmLogFilterRecallFilter"] = value;
+            }
+        }
     }
 }

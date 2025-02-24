@@ -25,13 +25,14 @@
          this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
          this.tsbZoomIn = new System.Windows.Forms.ToolStripButton();
          this.tsbZoomOut = new System.Windows.Forms.ToolStripButton();
+         this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+         this.tsbIgnoreCase = new System.Windows.Forms.ToolStripButton();
          this.dgvFilter = new System.Windows.Forms.DataGridView();
          this.clmImage = new System.Windows.Forms.DataGridViewImageColumn();
          this.clmActive = new System.Windows.Forms.DataGridViewCheckBoxColumn();
          this.clmColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
          this.clmExpression = new System.Windows.Forms.DataGridViewTextBoxColumn();
-         this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-         this.tsbIgnoreCase = new System.Windows.Forms.ToolStripButton();
+         this.tsbRecallFilter = new System.Windows.Forms.ToolStripButton();
          this.tsFilter.SuspendLayout();
          ((System.ComponentModel.ISupportInitialize)(this.dgvFilter)).BeginInit();
          this.SuspendLayout();
@@ -47,7 +48,8 @@
             this.tsbZoomIn,
             this.tsbZoomOut,
             this.toolStripSeparator1,
-            this.tsbIgnoreCase});
+            this.tsbIgnoreCase,
+            this.tsbRecallFilter});
          this.tsFilter.Location = new System.Drawing.Point(0, 0);
          this.tsFilter.Name = "tsFilter";
          this.tsFilter.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -108,6 +110,20 @@
          this.tsbZoomOut.Size = new System.Drawing.Size(23, 22);
          this.tsbZoomOut.Text = "Zoom Out";
          this.tsbZoomOut.Click += new System.EventHandler(this.TsbZoomOutClick);
+         // 
+         // toolStripSeparator1
+         // 
+         this.toolStripSeparator1.Name = "toolStripSeparator1";
+         this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+         // 
+         // tsbIgnoreCase
+         // 
+         this.tsbIgnoreCase.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+         this.tsbIgnoreCase.ImageTransparentColor = System.Drawing.Color.Magenta;
+         this.tsbIgnoreCase.Name = "tsbIgnoreCase";
+         this.tsbIgnoreCase.Size = new System.Drawing.Size(23, 22);
+         this.tsbIgnoreCase.Text = "Ignore Case";
+         this.tsbIgnoreCase.Click += new System.EventHandler(this.TsbIgnoreCaseClicked);
          // 
          // dgvFilter
          // 
@@ -192,19 +208,14 @@
          this.clmExpression.Name = "clmExpression";
          this.clmExpression.ReadOnly = true;
          // 
-         // toolStripSeparator1
+         // tsbRecallFilter
          // 
-         this.toolStripSeparator1.Name = "toolStripSeparator1";
-         this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-         // 
-         // tsbIgnoreCase
-         // 
-         this.tsbIgnoreCase.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-         this.tsbIgnoreCase.ImageTransparentColor = System.Drawing.Color.Magenta;
-         this.tsbIgnoreCase.Name = "tsbIgnoreCase";
-         this.tsbIgnoreCase.Size = new System.Drawing.Size(23, 22);
-         this.tsbIgnoreCase.Text = "Ignore Case";
-         this.tsbIgnoreCase.Click += new System.EventHandler(this.TsbIgnoreCaseClicked);
+         this.tsbRecallFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+         this.tsbRecallFilter.ImageTransparentColor = System.Drawing.Color.Magenta;
+         this.tsbRecallFilter.Name = "tsbRecallFilter";
+         this.tsbRecallFilter.Size = new System.Drawing.Size(23, 22);
+         this.tsbRecallFilter.Text = "Recall Filte At Startup";
+         this.tsbRecallFilter.Click += new System.EventHandler(this.tsbRecallFilter_Click);
          // 
          // FrmLogFilter
          // 
@@ -248,5 +259,6 @@
     private System.Windows.Forms.DataGridViewTextBoxColumn clmExpression;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     private System.Windows.Forms.ToolStripButton tsbIgnoreCase;
+    private System.Windows.Forms.ToolStripButton tsbRecallFilter;
   }
 }

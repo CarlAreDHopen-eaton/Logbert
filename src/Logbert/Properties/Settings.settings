@@ -593,5 +593,11 @@
     <Setting Name="FrmLogFilterIgnorehCase" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="FrmLogFilterExpressions" Type="Couchcoding.Logbert.Gui.Helper.FilterSettings" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="FrmLogFilterRecallFilter" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
