@@ -47,6 +47,7 @@ using Couchcoding.Logbert.Theme.Interfaces;
 using Couchcoding.Logbert.Theme;
 using Couchcoding.Logbert.Theme.Themes;
 using Couchcoding.Logbert.Theme.Helper;
+using System.Reflection;
 
 namespace Couchcoding.Logbert.Dialogs.Docking
 {
@@ -843,20 +844,34 @@ namespace Couchcoding.Logbert.Dialogs.Docking
         return;
       }
 
+      
+
       try
       {
-        dtgLogMessages.SelectionChanged -= DtgLogMessagesSelectionChanged;
+        dtgLogMessages.SuspendDrawing();
+        dtgLogMessages.SuspendLayout();
+        //
+        try
+        {
+          dtgLogMessages.SelectionChanged -= DtgLogMessagesSelectionChanged;
 
-        // Convert the list to an array to fix 
-        // accessing it while the enumeration is changed.
-        UpdateInternalList(messages.ToArray());
+          // Convert the list to an array to fix 
+          // accessing it while the enumeration is changed.
+          UpdateInternalList(messages.ToArray());
+        }
+        finally
+        {
+          dtgLogMessages.SelectionChanged += DtgLogMessagesSelectionChanged;
+        }
+
+        //
+        dtgLogMessages.Refresh();
       }
       finally
       {
-        dtgLogMessages.SelectionChanged += DtgLogMessagesSelectionChanged;
+        dtgLogMessages.ResumeLayout();
+        dtgLogMessages.ResumeDrawing();
       }
-
-      dtgLogMessages.Refresh();
     }
 
     /// <summary>
@@ -1260,7 +1275,7 @@ namespace Couchcoding.Logbert.Dialogs.Docking
     public FrmLogWindow(ILogProvider logProvider, ILogContainer logContainer)
     {
       InitializeComponent();
-
+      this.dtgLogMessages.DoubleBuffered(true);
       mLogcontainer = logContainer;
       mBookmarks    = new List<LogMessage>();
       InitializeColumns(logProvider);
@@ -1318,5 +1333,15 @@ namespace Couchcoding.Logbert.Dialogs.Docking
 
     #endregion
 
+  }
+
+  public static class ExtensionMethods
+  {
+    public static void DoubleBuffered(this DataGridView dgv, bool setting)
+    {
+      Type dgvType = dgv.GetType();
+      PropertyInfo pi = dgvType.GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
+      pi.SetValue(dgv, setting, null);
+    }
   }
 }
