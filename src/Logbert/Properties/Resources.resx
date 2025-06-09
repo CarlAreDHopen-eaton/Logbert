@@ -651,4 +651,7 @@ Maybe the data the file contains is not yet supported by Logbert.</value>
   <data name="strDocumentWarnTitle" xml:space="preserve">
     <value>Warning:</value>
   </data>
+  <data name="strAboutDlgForkInfo" xml:space="preserve">
+    <value>This version is a fork from: https://github.com/CarlAreDHopen-eaton/Logbert</value>
+  </data>
 </root>

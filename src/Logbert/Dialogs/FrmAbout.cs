@@ -80,12 +80,13 @@ namespace Couchcoding.Logbert.Dialogs
       InitializeComponent();
 
       lblVersion.Text = string.Format(
-          Resources.strAboutDlgVersion
+        Resources.strAboutDlgVersion
         , Application.ProductVersion);
 
       lblCopyright.Text = Resources.strAboutDlgCopyright;
-    }
+      lblFork.Text = Resources.strAboutDlgForkInfo;
 
-    #endregion
+      #endregion
+    }
   }
 }

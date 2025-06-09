@@ -290,6 +290,15 @@ namespace Couchcoding.Logbert.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This version is a fork from: https://github.com/CarlAreDHopen-eaton/Logbert.
+        /// </summary>
+        internal static string strAboutDlgForkInfo {
+            get {
+                return ResourceManager.GetString("strAboutDlgForkInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Version: {0}.
         /// </summary>
         internal static string strAboutDlgVersion {
