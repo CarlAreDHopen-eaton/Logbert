@@ -167,8 +167,20 @@ namespace Couchcoding.Logbert.Receiver.CustomReceiver.CustomUdpReceiver
     {
       get
       {
-        // Currently no logger tree is supported.
-        return false;
+        // Now supports logger tree.
+        return true;
+      }
+    }
+
+    /// <summary>
+    /// Gets the path separator for the logger tree.
+    /// </summary>
+    public override string LoggerTreePathSeperator
+    {
+      get
+      {
+        // Use default separator (dot) or customize if needed.
+        return ".";
       }
     }
 
@@ -286,7 +298,7 @@ namespace Couchcoding.Logbert.Receiver.CustomReceiver.CustomUdpReceiver
         try
         {
           LogMessage newLogMsg = new LogMessageCustom(
-              mEncoding.GetString(receiveBytes)
+            mEncoding.GetString(receiveBytes)
             , ++mLogNumber
             , mColumnizer);
 

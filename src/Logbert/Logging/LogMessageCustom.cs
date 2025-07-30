@@ -32,6 +32,7 @@ using System;
 using Couchcoding.Logbert.Receiver.CustomReceiver;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text.RegularExpressions;
 using Couchcoding.Logbert.Properties;
 using System.Text;
@@ -208,6 +209,30 @@ namespace Couchcoding.Logbert.Logging
     }
 
     /// <summary>
+    /// Retrieves the value associated with the specified column name, or a default value if the column is not found.
+    /// </summary>
+    /// <remarks>This method searches for a column by name within the available columns and attempts to
+    /// retrieve its associated value. If the column is not found or no value is associated with the column, the
+    /// <paramref name="defaultValue"/> is returned.</remarks>
+    /// <param name="columnName">The name of the column to search for.</param>
+    /// <param name="defaultValue">The value to return if the column is not found. Defaults to "NotFound".</param>
+    /// <returns>The value associated with the specified column name if found; otherwise, the specified <paramref
+    /// name="defaultValue"/>.</returns>
+    public string GetValueFromColumnName(string columnName, string defaultValue = "NotFound")
+    {
+      var column = mColumnizer.Columns.FirstOrDefault(col => col.Name == columnName);
+      if (column != null)
+      {
+        int colIndex = mColumnizer.Columns.IndexOf(column);
+        if (mParsedValue.TryGetValue(colIndex, out string value))
+        {
+          return value;
+        }
+      }
+      return defaultValue;
+    }
+
+    /// <summary>
     /// Exports the <see cref="LogMessage"/> with its data into a comma seperated line.
     /// </summary>
     /// <returns>The <see cref="LogMessage"/> with its data as a comma seperated line.</returns>
@@ -276,6 +301,9 @@ namespace Couchcoding.Logbert.Logging
       {
         throw new ApplicationException($"Unable to parse the following logger data: \"{rawData}\".");
       }
+
+      // Getting the logger from the logger column.
+      mLogger = GetValueFromColumnName(nameof(Logger), $"No {nameof(Logger)} column");
     }
 
     #endregion
